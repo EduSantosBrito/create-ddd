@@ -87,12 +87,18 @@ async function handleDomainCreation({ domainName }) {
       name: "useTypescript",
       message: "Your project uses Typescript?",
     },
+    {
+      type: "text",
+      name: "rootDir",
+      message: "What is your domain folder path?",
+      initial: `${cwd}/src/domain`,
+    },
   ]);
 
   // user choice associated with prompts
-  const { useTypescript, overwrite } = result;
+  const { useTypescript, overwrite, rootDir } = result;
 
-  const root = path.join(cwd, domainName);
+  const root = path.join(rootDir, domainName);
 
   if (overwrite) {
     emptyDir(root);
