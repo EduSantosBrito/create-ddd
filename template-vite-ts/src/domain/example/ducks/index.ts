@@ -1,10 +1,7 @@
-import { combineReducers } from "@reduxjs/toolkit";
 import example, { State as ExampleState } from "./example";
 
 export type RootState = {
     example: ExampleState;
 };
 
-export default combineReducers({
-    example,
-});
+export const reducers = { example };

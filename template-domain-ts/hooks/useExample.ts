@@ -1,5 +1,5 @@
 const useExample = () => {
-  return "Example";
+    return "Example";
 };
 
 export default useExample;

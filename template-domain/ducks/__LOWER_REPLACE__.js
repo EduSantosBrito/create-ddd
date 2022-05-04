@@ -1,5 +1,5 @@
 // TYPES
-const SET_COUNTER = "example/SET_COUNTER";
+const SET_COUNTER = "__LOWER_REPLACE__/SET_COUNTER";
 
 // INITIAL STATE
 const initialState = {

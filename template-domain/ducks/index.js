@@ -1,6 +1,3 @@
-import { combineReducers } from "@reduxjs/toolkit";
-import example from "./example";
+import __LOWER_REPLACE__ from "./__LOWER_REPLACE__";
 
-export default combineReducers({
-  example,
-});
+export const reducers = { __LOWER_REPLACE__ };

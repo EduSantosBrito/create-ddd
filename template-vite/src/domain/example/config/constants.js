@@ -1,1 +1,1 @@
-export const EXAMPLE_CONST = "EXAMPLE_CONST"
+export const EXAMPLE_CONST = "EXAMPLE_CONST";

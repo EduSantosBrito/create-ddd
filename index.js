@@ -109,12 +109,15 @@ async function handleDomainCreation({ domainName }) {
   const domainNameCamelized = camelCase(domainName);
   const domainNamePascalized = startCase(domainNameCamelized);
   const domainNameLower = domainName.toLowerCase();
+  const domainNameUpper = domainName.toUpperCase();
 
   const replaceDomainName = (path) =>
     path
       .replace(/__PASCAL_REPLACE__/g, domainNamePascalized)
       .replace(/__CAMEL_REPLACE__/g, domainNameCamelized)
-      .replace(/__LOWER_REPLACE__/g, domainNameLower);
+      .replace(/__LOWER_REPLACE__/g, domainNameLower)
+      .replace(/__UPPER_REPLACE__/g, domainNameUpper)
+      .replace(" ", "");
 
   const write = (filePath, name, isDirectory, targetParentFolder) => {
     if (isDirectory) {
@@ -141,6 +144,11 @@ async function handleDomainCreation({ domainName }) {
       files: targetPath,
       from: /__LOWER_REPLACE__/g,
       to: domainNameLower,
+    });
+    replace.sync({
+      files: targetPath,
+      from: /__UPPER_REPLACE__/g,
+      to: domainNameUpper,
     });
   };
 

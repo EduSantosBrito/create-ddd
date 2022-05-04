@@ -7,7 +7,7 @@ import { RootState } from "../../ducks";
 const Example = () => {
     const dispatch = useDispatch();
     const counter = useSelector((store: RootState) => store.example.counter);
-    const [stateCounter, setStateCounter] = useState<number>(counter);
+    const [stateCounter, setStateCounter] = useState(counter);
 
     return (
         <div>

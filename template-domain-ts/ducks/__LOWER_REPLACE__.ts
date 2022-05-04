@@ -1,5 +1,14 @@
 // TYPES
-const SET_COUNTER = "example/SET_COUNTER";
+const SET_COUNTER = "__LOWER_REPLACE__/SET_COUNTER";
+
+export type State = {
+    counter: number;
+};
+
+type Action = {
+    type: string;
+    payload: Partial<State>;
+};
 
 // INITIAL STATE
 const initialState = {
@@ -7,7 +16,7 @@ const initialState = {
 };
 
 // REDUCER
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action: Action) => {
     switch (action.type) {
         case SET_COUNTER:
             return { ...state, counter: action.payload.counter };
@@ -19,7 +28,7 @@ const reducer = (state = initialState, action) => {
 export default reducer;
 
 // ACTION
-export const setCounter = (counter) => {
+export const setCounter = (counter: number) => {
     return {
         type: SET_COUNTER,
         payload: {
