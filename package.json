@@ -1,0 +1,33 @@
+{
+  "name": "create-ddd",
+  "version": "0.1.0",
+  "description": "Scaffolding project with DDD pattern on front-end using React.js",
+  "author": "Eduardo Brito",
+  "license": "MIT",
+  "main": "index.js",
+  "bin": {
+    "create-ddd": "index.js"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "files": [
+    "index.js",
+    "template-*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EduSantosBrito/create-ddd.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EduSantosBrito/create-ddd/issues"
+  },
+  "dependencies": {
+    "kolorist": "^1.5.1",
+    "lodash.camelcase": "^4.3.0",
+    "lodash.startcase": "^4.4.0",
+    "minimist": "^1.2.6",
+    "prompts": "^2.4.2",
+    "replace-in-file": "^6.3.2"
+  }
+}
