@@ -63,13 +63,27 @@ async function handleDomainCreation({ domainName }) {
         (domainName = state.value.trim() || defaultDomainName),
     },
     {
-      type: () =>
-        !fs.existsSync(domainName) || isEmpty(domainName) ? null : "confirm",
+      type: "confirm",
+      name: "useTypescript",
+      message: "Your project uses Typescript?",
+    },
+    {
+      type: "text",
+      name: "rootDir",
+      message: "What is your domain folder path?",
+      initial: `${cwd}/src/domain`,
+    },
+    {
+      type: (previousValue) =>
+        !fs.existsSync(`${previousValue}/${domainName}`) ||
+        isEmpty(`${previousValue}/${domainName}`)
+          ? null
+          : "confirm",
       name: "overwrite",
-      message: () =>
+      message: (previousValue) =>
         domainName === "."
           ? "Current directory"
-          : `Target directory "${domainName}"` +
+          : `Target directory "${previousValue}/${domainName}"` +
             ` is not empty. Remove existing files and continue?`,
     },
     {
@@ -82,17 +96,6 @@ async function handleDomainCreation({ domainName }) {
       },
       name: "overwriteChecker",
     },
-    {
-      type: "confirm",
-      name: "useTypescript",
-      message: "Your project uses Typescript?",
-    },
-    {
-      type: "text",
-      name: "rootDir",
-      message: "What is your domain folder path?",
-      initial: `${cwd}/src/domain`,
-    },
   ]);
 
   // user choice associated with prompts
@@ -101,9 +104,9 @@ async function handleDomainCreation({ domainName }) {
   const root = path.join(rootDir, domainName);
 
   if (overwrite) {
-    emptyDir(root);
+    emptyDir(`${rootDir}/${domainName}`);
   } else if (!fs.existsSync(root)) {
-    fs.mkdirSync(root);
+    fs.mkdirSync(`${rootDir}/${domainName}`);
   }
 
   console.log(`\nCreating domain ${root}...`);
@@ -113,17 +116,15 @@ async function handleDomainCreation({ domainName }) {
     useTypescript ? "template-domain-ts" : "template-domain"
   );
   const domainNameCamelized = camelCase(domainName);
-  const domainNamePascalized = startCase(domainNameCamelized);
-  const domainNameLower = domainName.toLowerCase();
+  const domainNamePascalized = startCase(domainNameCamelized).replace(" ", "");
   const domainNameUpper = domainName.toUpperCase();
 
   const replaceDomainName = (path) =>
     path
       .replace(/__PASCAL_REPLACE__/g, domainNamePascalized)
       .replace(/__CAMEL_REPLACE__/g, domainNameCamelized)
-      .replace(/__LOWER_REPLACE__/g, domainNameLower)
-      .replace(/__UPPER_REPLACE__/g, domainNameUpper)
-      .replace(" ", "");
+      .replace(/__LOWER_REPLACE__/g, domainNameCamelized)
+      .replace(/__UPPER_REPLACE__/g, domainNameUpper);
 
   const write = (filePath, name, isDirectory, targetParentFolder) => {
     if (isDirectory) {
@@ -149,7 +150,7 @@ async function handleDomainCreation({ domainName }) {
     replace.sync({
       files: targetPath,
       from: /__LOWER_REPLACE__/g,
-      to: domainNameLower,
+      to: domainNameCamelized,
     });
     replace.sync({
       files: targetPath,
