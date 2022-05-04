@@ -1,10 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { reducers as example } from "./domain/example";
+import { reducers as exampleReducers, RootState as ExampleRootState } from "./domain/example/ducks";
 
-export type RootState = {
-    example: example.RootState;
-};
+export type RootState = ExampleRootState;
 
 export default combineReducers({
-    ...example.reducers,
+    ...exampleReducers,
 });

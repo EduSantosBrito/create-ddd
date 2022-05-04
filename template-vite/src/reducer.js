@@ -1,6 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { reducers as example } from "./domain/example";
+import { reducers as exampleReducers } from "./domain/example/ducks";
 
 export default combineReducers({
-    ...example.reducers,
+    ...exampleReducers,
 });
