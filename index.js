@@ -106,7 +106,7 @@ async function handleDomainCreation({ domainName }) {
   if (overwrite) {
     emptyDir(`${rootDir}/${domainName}`);
   } else if (!fs.existsSync(root)) {
-    fs.mkdirSync(`${rootDir}/${domainName}`);
+    fs.mkdirSync(`${rootDir}/${domainName}`, { recursive: true });
   }
 
   console.log(`\nCreating domain ${root}...`);
