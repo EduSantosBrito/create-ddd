@@ -46,6 +46,7 @@ const TEMPLATES = TOOLINGS.map(
 
 const renameFiles = {
   _gitignore: ".gitignore",
+  _gitattributes: ".gitattributes",
 };
 
 async function handleDomainCreation({ domainName }) {
