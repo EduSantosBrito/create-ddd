@@ -166,11 +166,12 @@ async function handleDomainCreation({ domainName }) {
       const stat = fs.statSync(targetPath);
       const isDirectory = stat.isDirectory();
       const parentFolder = targetPath
-        .replace(`/${file}`, "")
+        .replace(`${file}`, "")
         .replace(templateDir, "");
       const targetParentFolder = path.join(root, parentFolder);
       const targetParentFolderExists = fs.existsSync(targetParentFolder);
-      if (!targetParentFolderExists) {
+
+      if (!targetParentFolderExists && targetParentFolder.indexOf(".") < 0) {
         const folderName = replaceDomainName(targetParentFolder);
         fs.mkdirSync(folderName);
       }
